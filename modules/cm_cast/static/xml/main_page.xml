@@ -13,6 +13,7 @@
                         <li t-esc="movie['name'], movie['description']" />
                     </t>
                 </ul>
+                <h3>Footer</h3>
             </div>
             <link rel="stylesheet" href="/cm_cast/static/css/main_page.css"/>
     </template>
