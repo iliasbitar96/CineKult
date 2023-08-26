@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="movie_form_view" model="ir.ui.view">
+        <field name="name">movie.form.view</field>
+        <field name="model">movie</field>
+        <field name="arch" type="xml">
+            <form string="Movie">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="genre"/>
+                            <field name="duration"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="cast_ids" widget="many2many_tags" string="Directors" domain="[('member_type', '=', 'Director')]"/>
+                            <field name="cast_ids" widget="many2many_tags" string="Actors" domain="[('member_type', '=', 'Actor')]"/>
+                        </group>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="movie_list_view" model="ir.ui.view">
+            <field name="name">Movie List View</field>
+        <field name="model">movie</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="genre"/>
+                    <field name="duration"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+    <record id="action_movie" model="ir.actions.act_window">
+        <field name="name">Movies</field>
+        <field name="res_model">movie</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Movies" id="menu_movie" action="action_movie" sequence="25"/>
+</odoo>

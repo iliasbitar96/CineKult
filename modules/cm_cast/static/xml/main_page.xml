@@ -1,0 +1,19 @@
+<odoo>
+    <template id="main_page" name="Hello Page">
+            <div class="container">
+                <h1 class="title">La liste !</h1>
+                <form method="post" action="/cm_cast/search_movies">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <label for="search">Recherche par mots clés</label>
+                    <input type="text" id="search" name="search"/><br/>
+                    <input type="submit" value="Enregistrer"/>
+                </form>
+                <ul>
+                    <t t-foreach="movies" t-as="movie">
+                        <li t-esc="movie['name'], movie['description']" />
+                    </t>
+                </ul>
+            </div>
+            <link rel="stylesheet" href="/cm_cast/static/css/main_page.css"/>
+    </template>
+</odoo>
