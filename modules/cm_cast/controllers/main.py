@@ -18,7 +18,6 @@ class Main(Controller):
             )
         return request.render('cm_cast.main_page', {'movies': movie_list})
 
-
     @route('/cm_cast/search_movies', type='http', auth='public', methods=['POST'])
     def save_product(self, **post):
         name = post.get('search')
@@ -33,3 +32,13 @@ class Main(Controller):
                                                          ('cast_ids.firstname', 'ilike', name)])
         filtered_movies = movie_name_search + Movie
         return request.render('cm_cast.main_page', {'movies': filtered_movies})
+
+    @route('/cm_cast/search_selection', type='http', auth='public', methods=['POST'])
+    def save_product(self, **post):
+        name = post.get('search')
+        Movie = request.env['movie']
+        movies = Movie.search([])
+        if post.get('choice-select'):
+            movies = Movie.search([('cast_ids.first_name', '=', post.get('choice-select'))])
+        return request.render('cm_cast.main_page', {'movies': movies})
+

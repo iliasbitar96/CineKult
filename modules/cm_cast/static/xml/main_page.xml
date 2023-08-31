@@ -10,10 +10,39 @@
                 </form>
                 <ul>
                     <t t-foreach="movies" t-as="movie">
-                        <li t-esc="movie['name'], movie['description']" />
+                        <li t-esc="movie['name']" />
                     </t>
                 </ul>
+                <form method="post" action="/cm_cast/search_selection">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <select id="choice-select" name="choice-select">
+                        <option value="category">Category</option>
+                        <option value="actor">Acteur</option>
+                        <option value="director">Realisateur</option>
+                        <option value="production">Production</option>
+                    </select>
+                    <select id="category-select" style="display: inline">
+                        <option value="cat1">Category 1</option>
+                        <option value="cat2">Category 2</option>
+                        <option value="cat3">Category 3</option>
+                    </select>
+                    <div id="actor-div" style="display: none;">
+                        <label for="actor">Acteur</label>
+                        <input id="actor" placeholder="Acteur"/>
+                    </div>
+                    <div id="director-div" style="display: none;">
+                        <label for="director">Realisateur</label>
+                        <input id="director" placeholder="Realisateur"/>
+                    </div>
+                    <div id="production-div" style="display: none;">
+                        <label for="production">Production</label>
+                        <input id="production" placeholder="Production"/>
+                    </div>
+                    <input type="submit" />
+                </form>
             </div>
+            <script type="text/javascript" src="/cm_cast/static/js/search_select.js" />
+
             <link rel="stylesheet" href="/cm_cast/static/css/main_page.css"/>
     </template>
 </odoo>
