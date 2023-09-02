@@ -18,7 +18,7 @@ class Main(Controller):
             )
         return request.render('cm_cast.main_page', {'movies': movie_list})
 
-    @route('/cm_cast/search_movies', type='http', auth='public', methods=['POST'])
+    @route('/cm_cast/search_movies', type='http', auth='public', methods=['POST'], cors="*")
     def search_movies(self, **post):
         name = post.get('search')
         Movie = request.env['movie']
