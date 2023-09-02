@@ -2,47 +2,58 @@
     <template id="main_page" name="Hello Page">
             <div class="container">
                 <h1 class="title">La liste !</h1>
-                <form method="post" action="/cm_cast/search_movies">
+                <p class="intro">
+                    Voilà la fameuse liste, vous pouvez scroll jusqu’à trouver la perle rare ou vous pouvez
+                    chercher directement un film en tapant des mots clés ou chercher en fonction des
+                    catégories. Bonne recherche !
+                </p>
+                <button class="btn-primary-ck">
+                    Ajouter un film
+                </button>
+                <form method="post" action="/cm_cast/search_movies" class="separator d-flex">
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                    <label for="search">Recherche par mots clés</label>
-                    <input type="text" id="search" name="search"/><br/>
-                    <input type="submit" value="Enregistrer"/>
+                    <div class="d-flex">
+                        <input class="search_bar" type="text" id="search" name="search" placeholder="Rechercher par mots clés"/>
+                        <button class="fa fa-cutlery" type="submit" value="Enregistrer"/>
+                    </div>
                 </form>
-                <ul>
-                    <t t-foreach="movies" t-as="movie">
-                        <li t-esc="movie['name']" />
-                    </t>
-                </ul>
-                <form method="post" action="/cm_cast/search_selection">
-                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                    <select id="choice-select" name="choice-select">
-                        <option value="category">Category</option>
-                        <option value="actor">Acteur</option>
-                        <option value="director">Realisateur</option>
-                        <option value="production">Production</option>
-                    </select>
-                    <select id="category-select" style="display: inline">
-                        <option value="cat1">Category 1</option>
-                        <option value="cat2">Category 2</option>
-                        <option value="cat3">Category 3</option>
-                    </select>
-                    <div id="actor-div" style="display: none;">
-                        <label for="actor">Acteur</label>
-                        <input id="actor" placeholder="Acteur"/>
-                    </div>
-                    <div id="director-div" style="display: none;">
-                        <label for="director">Realisateur</label>
-                        <input id="director" placeholder="Realisateur"/>
-                    </div>
-                    <div id="production-div" style="display: none;">
-                        <label for="production">Production</label>
-                        <input id="production" placeholder="Production"/>
-                    </div>
-                    <input type="submit" />
-                </form>
+                <div style="display: none">
+                    <ul>
+                        <t t-foreach="movies" t-as="movie">
+                            <li t-esc="movie['name']" />
+                        </t>
+                    </ul>
+                    <form method="post" action="/cm_cast/search_selection" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <select id="choice-select" name="choice-select">
+                            <option value="category">Category</option>
+                            <option value="actor">Acteur</option>
+                            <option value="director">Realisateur</option>
+                            <option value="production">Production</option>
+                        </select>
+                        <select id="category-select" name="category-select" style="display: inline">
+                            <option value="horror">Horror</option>
+                            <option value="thriller">Thriller</option>
+                            <option value="animation">Animation</option>
+                            <option value="drame">Drame</option>
+                        </select>
+                        <span id="actor-div" style="display: none;">
+                            <label for="actor">Acteur</label>
+                            <input id="actor" name="actor-search" placeholder="Acteur"/>
+                        </span>
+                        <div id="director-div" style="display: none;">
+                            <label for="director">Realisateur</label>
+                            <input id="director" name="director-search" placeholder="Realisateur"/>
+                        </div>
+                        <div id="production-div"  style="display: none;">
+                            <label for="production">Production</label>
+                            <input id="production" name="production-search" placeholder="Production"/>
+                        </div>
+                        <input type="submit" />
+                    </form>
+                </div>
             </div>
             <script type="text/javascript" src="/cm_cast/static/js/search_select.js" />
-
             <link rel="stylesheet" href="/cm_cast/static/css/main_page.css"/>
     </template>
 </odoo>

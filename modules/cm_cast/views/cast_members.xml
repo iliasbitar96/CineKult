@@ -7,7 +7,7 @@
             <form string="Cast">
                 <sheet>
                     <group>
-                        <field name="name"/>
+                        <field name="name" readonly="1"/>
                         <field name="firstname"/>
                         <field name="lastname"/>
                         <field name="member_type"/>

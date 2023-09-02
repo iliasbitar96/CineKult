@@ -16,6 +16,7 @@
                         <group>
                             <field name="cast_ids" widget="many2many_tags" string="Directors" domain="[('member_type', '=', 'Director')]"/>
                             <field name="cast_ids" widget="many2many_tags" string="Actors" domain="[('member_type', '=', 'Actor')]"/>
+                            <field name="production" />
                         </group>
                     </group>
 

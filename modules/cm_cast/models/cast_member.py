@@ -14,4 +14,5 @@ class CastMember(models.Model):
     @api.onchange('firstname', 'lastname')
     def onchange_name(self):
         for record in self:
-            record.name = record.firstname + ' ' + record.lastname
+            if record.firstname and record.lastname:
+                record.name = record.firstname + ' ' + record.lastname
