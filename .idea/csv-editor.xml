@@ -24,6 +24,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/odoo/addons/l10n_hr/data/account.account.template.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/odoo/addons/mrp_subcontracting/security/ir.model.access.csv">
           <value>
             <Attribute>
@@ -73,6 +80,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/odoo/addons/web_tour/security/ir.rule.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/odoo/addons/website_crm_partner_assign/security/ir.model.access.csv">
           <value>
             <Attribute>
@@ -116,6 +130,13 @@
           </value>
         </entry>
         <entry key="/odoo/odoo/addons/base/security/ir.model.access.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/odoo/odoo/addons/test_new_api/security/ir.model.access.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

@@ -13,7 +13,7 @@ const MovieCard = props => {
             </div>
             <div className="vote-counter">
                 <img src={Incr} />
-                <span className='vote-count-number'>223{props.voteCount}</span>
+                <span className='vote-count-number'>{props.voteCount}</span>
                 <img src={Decr} />
             </div>
         </div>
@@ -22,10 +22,10 @@ const MovieCard = props => {
                 {props.title}
             </div>
             <div className="card-info">
-                <p><span className='info-title'>Sorti en </span><span className='info'>1990{props.date}</span></p>
-                <p><span className='info-title'>De </span><span className='info'>Chrisopher Nolan{props.diector}</span></p>
+                <p><span className='info-title'>Sorti en </span><span className='info'>{props.date}</span></p>
+                <p><span className='info-title'>De </span><span className='info'>{props.director}</span></p>
                 <p><span className='info-title'>Par </span><span className='info'>A24{props.production}</span></p>
-                <p><span className='info-title'>Avec </span><span className='info'>Johnny Depp, Leonardo Di Caprio, Julien Doré{props.actors}</span></p>
+                <p><span className='info-title'>Avec </span><span className='info'>{props.actors}</span></p>
             </div>
         </div>
         <div className="card-bottom">

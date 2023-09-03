@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class Movie(models.Model):
@@ -6,14 +6,22 @@ class Movie(models.Model):
     _description = 'movies'
 
     name = fields.Char('Movie')
-    votes = fields.Many2one('vote')
-    cast_ids = fields.Many2many('cast.member')
+    vote_id = fields.Many2one('vote')
+    total_votes = fields.Integer(compute="compute_total_votes")
+    cast_ids = fields.Many2many('cast.member', domain="[('member_type', '=', 'actor')]")
     genre = fields.Selection(
         [('horror', 'Horror'), ('thriller', 'Thriller'), ('animation', 'Animation'), ('drame', 'Drame')])
     duration = fields.Selection([('1h00', '1h00'), ('1h30', '1h30'), ('2h00', '2h00'), ('2h30', '2h30'), ('3h', '3h+')])
     description = fields.Text('Description')
     production = fields.Many2one('production', 'Production')
     creator_id = fields.Many2one('res.user')
+    year = fields.Integer('Year')
+    director = fields.Many2one('cast.member', domain="[('member_type', '=', 'director')]")
+
+    @api.depends('vote_id', 'vote_id.up_votes', 'vote_id.down_votes')
+    def compute_total_votes(self):
+        for record in self:
+            record.total_votes = record.vote_id.up_votes - record.vote_id.down_votes
 
     def search_movie(self, choice, post):
         if choice == 'actor':

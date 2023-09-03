@@ -50,7 +50,14 @@ function HomePage() {
       <div className="movie-list">
         <ul>
           <li>{movie.map(m => (
-            <MovieCard key={m.id} title={m.name}/>
+            <MovieCard 
+              key={m.id} 
+              title={m.name} 
+              voteCount={m.votes}
+              date={m.year}
+              director={m.director}
+              actors={m.actors}
+              />
           ))}</li>
         </ul>
       </div>

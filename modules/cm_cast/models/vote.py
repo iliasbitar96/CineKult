@@ -8,3 +8,4 @@ class Vote(models.Model):
     up_votes = fields.Integer('Up votes')
     down_votes = fields.Integer('Down votes')
     movie_id = fields.Many2one('movie')
+    voter = fields.Many2one('res.partner')

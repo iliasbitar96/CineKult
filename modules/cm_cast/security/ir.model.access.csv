@@ -1,4 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_movie_internal_user,access_movie_internal_user,model_movie,base.group_portal,1,1,1,1
-access_cast_internal_user,access_cast_internal_user,model_cast_member,base.group_portal,1,1,1,1
+access_movie_portal_user,access_movie_portal_user,model_movie,base.group_portal,1,1,1,1
+access_movie_internal_user,access_movie_internal_user,model_movie,base.group_user,1,1,1,1
+access_cast_portal_user,access_cast_portal_user,model_cast_member,base.group_portal,1,1,1,1
+access_cast_internal_user,access_cast_internal_user,model_cast_member,base.group_user,1,1,1,1
 access_production_internal_user,access_production_internal_user,model_production,base.group_user,1,1,1,1

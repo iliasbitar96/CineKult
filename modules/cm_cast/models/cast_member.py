@@ -11,8 +11,13 @@ class CastMember(models.Model):
     movie_ids = fields.Many2many('movie', string='Movies')
     member_type = fields.Selection([('actor', 'Actor'), ('director', 'Director'), ('production', 'Production Company')])
 
-    @api.onchange('firstname', 'lastname')
-    def onchange_name(self):
-        for record in self:
-            if record.firstname and record.lastname:
-                record.name = record.firstname + ' ' + record.lastname
+    def write(self, vals):
+        if self.lastname and self.firstname:
+            vals['name'] = self.firstname + ' ' + self.lastname
+        return super().write(vals)
+
+    # @api.onchange('lastname', 'firstname')
+    # def onchange_name(self):
+    #     for record in self:
+    #         if record.firstname and record.lastname:
+    #             record.name = record.firstname + ' ' + record.lastname
