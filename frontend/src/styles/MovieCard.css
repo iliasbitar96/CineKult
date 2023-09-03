@@ -1,0 +1,59 @@
+.movieCard {
+    width: 100%;
+    min-height: 261px;
+    margin-bottom: 24px;
+}
+.cardCreator {
+    width: 60%;
+    height: 50px;
+    border-radius: 25px 25px 0 0;
+    background-color: #4B35F3;
+    padding-left: 16px;
+    padding-top: 8px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+}
+
+.card-body {
+    width: 100%;
+    padding: 16px;
+    background-color: #4B35F3;
+    border-radius: 0 25px 0 0;
+}
+.card-title {
+    width: 100%;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    font-family: 'Sora', sans-serif;
+    font-size: 31px;
+}
+.card-info {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    color: #F2F2F2;
+    line-height: 22px;;
+}
+.card-bottom {
+    width: 100%;
+    min-height: 48px;
+    background-color: #F2F2F2;
+    border-radius: 0 0 25px 25px;
+}
+.top-card {
+    display: flex;
+    align-items: center;
+}
+.vote-counter {
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+}
+.info-title {
+    opacity: 60%;
+}

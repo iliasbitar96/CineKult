@@ -1,0 +1,22 @@
+.btn-mv {
+    width: 100%;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-family: 'Manrope', sans-serif;
+    border-radius: 4px;
+    color: #F2F2F2;
+    cursor: pointer;
+}
+.btn-mv.primary {
+    background-color: #432FDA;
+    color: #F2F2F2;
+}
+.btn-mv.secondary {
+    border: 2px solid #432FDA;
+}
+.btn-mv.secondary:active {
+    border: 2px solid #F2F2F2;
+}
