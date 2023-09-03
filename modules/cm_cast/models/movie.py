@@ -7,7 +7,7 @@ class Movie(models.Model):
 
     name = fields.Char('Movie')
     vote_id = fields.Many2one('vote')
-    total_votes = fields.Integer(compute="compute_total_votes")
+    total_votes = fields.Integer(related="vote_id.total_votes", store=True)
     cast_ids = fields.Many2many('cast.member', domain="[('member_type', '=', 'actor')]")
     genre = fields.Selection(
         [('horror', 'Horror'), ('thriller', 'Thriller'), ('animation', 'Animation'), ('drame', 'Drame')])
@@ -18,7 +18,7 @@ class Movie(models.Model):
     year = fields.Integer('Year')
     director = fields.Many2one('cast.member', domain="[('member_type', '=', 'director')]")
 
-    @api.depends('vote_id', 'vote_id.up_votes', 'vote_id.down_votes')
+    @api.onchange('vote_id', 'vote_id.up_votes', 'vote_id.down_votes')
     def compute_total_votes(self):
         for record in self:
             record.total_votes = record.vote_id.up_votes - record.vote_id.down_votes

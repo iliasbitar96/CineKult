@@ -11,7 +11,7 @@
                         <field name="firstname"/>
                         <field name="lastname"/>
                         <field name="member_type"/>
-                        <field name="movie_ids" widget="many2many_tags"/>
+                        <field name="movie_ids" widget="many2many_tags" invisible="1"/>
                     </group>
                 </sheet>
             </form>

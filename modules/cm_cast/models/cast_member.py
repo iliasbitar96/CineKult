@@ -12,8 +12,14 @@ class CastMember(models.Model):
     member_type = fields.Selection([('actor', 'Actor'), ('director', 'Director'), ('production', 'Production Company')])
 
     def write(self, vals):
+        firstname = self.firstname
+        lastname = self.lastname
+        if vals.get('firstname'):
+            firstname = vals.get('firstname')
+        if vals.get('lastname'):
+            lastname = vals.get('lastname')
         if self.lastname and self.firstname:
-            vals['name'] = self.firstname + ' ' + self.lastname
+            vals['name'] = firstname + ' ' + lastname
         return super().write(vals)
 
     # @api.onchange('lastname', 'firstname')

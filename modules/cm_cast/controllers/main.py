@@ -5,19 +5,9 @@ from odoo.tools import json
 
 
 class Main(Controller):
-    @route('/', type='http', auth="public")
+    @route('/', type='http', auth="public", cors='*')
     def my_page(self, movies=False):
-        Movies = request.env['movie']
-        products = Movies.sudo().search([])
-        movie_list = []
-        for product in products:
-            movie_list.append(
-                {
-                    'id': product.id,
-                    'name': product.name,
-                }
-            )
-        return request.render('cm_cast.main_page', {'movies': movie_list})
+        return redirect('http://localhost:3000/')
 
     @route('/cm_cast/search_movies', type='http', auth='public', methods=['POST', 'GET'], cors="*")
     def search_movies(self, **post):
@@ -56,3 +46,23 @@ class Main(Controller):
         Movie = request.env['movie']
         movies = Movie.search_movie(choice, post)
         return request.render('cm_cast.main_page', {'movies': movies})
+
+    @route('/cm_cast/set_vote', type='http', auth='public', methods=['POST'], cors='*', csrf=False)
+    def set_vote(self, **post):
+        headers_json = {'Content-Type': 'application/json'}
+        movie_id = request.env['movie'].sudo().browse(int(post.get('id')))
+        vote_id = request.env['vote'].sudo().search([('movie_id', '=', movie_id.id)])
+        down_vote = post.get('down_vote')
+        up_vote = post.get('up_vote')
+        if not vote_id:
+            vote_id = request.env['vote'].sudo().create({
+                'movie_id': movie_id.id
+            })
+        if down_vote:
+            vote_id.down_votes += 1
+        if up_vote:
+            vote_id.up_votes += 1
+        movie_id.vote_id = vote_id.id
+        votes = (request.env['vote'].sudo().search([('movie_id', '=', movie_id.id)]).up_votes - request.env[
+            'vote'].sudo().search([('movie_id', '=', movie_id.id)]).down_votes)
+        return Response(json.dumps({'vote': votes}), headers=headers_json)
