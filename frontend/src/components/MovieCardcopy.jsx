@@ -22,7 +22,7 @@ const MovieCard = props => {
     }
     const remove_votes = (e) => {
         const params = new URLSearchParams();
-        params.append('id', props.id);
+        params.append('id', 4);
         params.append('down_vote', -1);
         axios({ 
             method: 'post',

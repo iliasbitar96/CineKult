@@ -17,11 +17,15 @@ class Movie(models.Model):
     creator_id = fields.Many2one('res.user')
     year = fields.Integer('Year')
     director = fields.Many2one('cast.member', domain="[('member_type', '=', 'director')]")
+    total_votes = fields.Integer('Votes', compute='compute_total_votes')
 
-    @api.onchange('vote_id', 'vote_id.up_votes', 'vote_id.down_votes')
+    @api.depends('vote_id', 'vote_id.vote_type')
     def compute_total_votes(self):
+        Vote = self.env['vote']
         for record in self:
-            record.total_votes = record.vote_id.up_votes - record.vote_id.down_votes
+            movie_votes = Vote.sudo().search([('movie_id', '=', record.id)])
+            record.total_votes = len(movie_votes.filtered(lambda x: x.vote_type == True)) \
+                    - len(movie_votes.filtered(lambda x: x.vote_type == False))
 
     def search_movie(self, choice, post):
         if choice == 'actor':

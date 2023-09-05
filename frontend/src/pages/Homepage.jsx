@@ -56,7 +56,8 @@ function HomePage() {
               voteCount={m.votes}
               date={m.year}
               director={m.director}
-              actors={m.actors}
+              actors={m.actor}
+              id={m.id}
               />
           ))}</li>
         </ul>

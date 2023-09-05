@@ -51,18 +51,17 @@ class Main(Controller):
     def set_vote(self, **post):
         headers_json = {'Content-Type': 'application/json'}
         movie_id = request.env['movie'].sudo().browse(int(post.get('id')))
-        vote_id = request.env['vote'].sudo().search([('movie_id', '=', movie_id.id)])
-        down_vote = post.get('down_vote')
-        up_vote = post.get('up_vote')
-        if not vote_id:
-            vote_id = request.env['vote'].sudo().create({
-                'movie_id': movie_id.id
+        Vote = request.env['vote']
+        user_vote = Vote.sudo().search(['|', ('movie_id', '=', movie_id.id), ('user_id', '=', request.env.user.id)], limit=1)
+        vote_type = post.get('up_vote') == '1'
+        if user_vote:
+            user_vote.update({
+                'vote_type': vote_type,
             })
-        if down_vote:
-            vote_id.down_votes += 1
-        if up_vote:
-            vote_id.up_votes += 1
-        movie_id.vote_id = vote_id.id
-        votes = (request.env['vote'].sudo().search([('movie_id', '=', movie_id.id)]).up_votes - request.env[
-            'vote'].sudo().search([('movie_id', '=', movie_id.id)]).down_votes)
-        return Response(json.dumps({'vote': votes}), headers=headers_json)
+        else:
+            Vote.sudo().create({
+                'movie_id': movie_id.id,
+                'user_id': request.env.user.id,
+                'vote_type': post.get('up_vote') == '1',
+            })
+        return Response(json.dumps({'vote': movie_id.total_votes}), headers=headers_json)
