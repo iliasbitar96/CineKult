@@ -6,7 +6,7 @@ class Movie(models.Model):
     _description = 'movies'
 
     name = fields.Char('Movie')
-    vote_id = fields.Many2one('vote')
+    vote_ids = fields.One2many('vote', 'movie_id')
     total_votes = fields.Integer(related="vote_id.total_votes", store=True)
     cast_ids = fields.Many2many('cast.member', domain="[('member_type', '=', 'actor')]")
     genre = fields.Selection(
@@ -19,13 +19,12 @@ class Movie(models.Model):
     director = fields.Many2one('cast.member', domain="[('member_type', '=', 'director')]")
     total_votes = fields.Integer('Votes', compute='compute_total_votes')
 
-    @api.depends('vote_id', 'vote_id.vote_type')
+    @api.depends('vote_ids')
     def compute_total_votes(self):
-        Vote = self.env['vote']
         for record in self:
-            movie_votes = Vote.sudo().search([('movie_id', '=', record.id)])
-            record.total_votes = len(movie_votes.filtered(lambda x: x.vote_type == True)) \
-                    - len(movie_votes.filtered(lambda x: x.vote_type == False))
+            vote_ids = record.vote_ids
+            record.total_votes = len(vote_ids.filtered(lambda x: x.vote_type == True)) - \
+                                 len(vote_ids.filtered(lambda x: x.vote_type == False))
 
     def search_movie(self, choice, post):
         if choice == 'actor':

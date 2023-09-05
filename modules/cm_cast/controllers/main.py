@@ -52,7 +52,7 @@ class Main(Controller):
         headers_json = {'Content-Type': 'application/json'}
         movie_id = request.env['movie'].sudo().browse(int(post.get('id')))
         Vote = request.env['vote']
-        user_vote = Vote.sudo().search(['|', ('movie_id', '=', movie_id.id), ('user_id', '=', request.env.user.id)], limit=1)
+        user_vote = Vote.sudo().search([('movie_id', '=', movie_id.id), ('user_id', '=', request.env.user.id)], limit=1)
         vote_type = post.get('up_vote') == '1'
         if user_vote:
             user_vote.update({
