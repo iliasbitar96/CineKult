@@ -9,6 +9,7 @@ import ButtonTheme from '../components/ButtonTheme';
 
 function HomePage() {
   const [movie, setMovie] = useState([]);
+  const search_by = ['Genre', 'Acteur', 'Realisateur', 'Producteur']
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +41,14 @@ function HomePage() {
       />
       <div className="search-by">
         <p>Rechercher par</p>
-        <DropDown />
+        <DropDown items={search_by}/>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <Searchbar placeholder="Ecrivez le nom d'un acteur" /> 
       </div>
       <ButtonTheme 

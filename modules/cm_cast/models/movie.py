@@ -7,8 +7,7 @@ class Movie(models.Model):
 
     name = fields.Char('Movie')
     vote_ids = fields.One2many('vote', 'movie_id')
-    total_votes = fields.Integer(related="vote_id.total_votes", store=True)
-    cast_ids = fields.Many2many('cast.member', domain="[('member_type', '=', 'actor')]")
+    cast_ids = fields.Many2many('cast.member', string="Actors", domain="[('member_type', '=', 'actor')]")
     genre = fields.Selection(
         [('horror', 'Horror'), ('thriller', 'Thriller'), ('animation', 'Animation'), ('drame', 'Drame')])
     duration = fields.Selection([('1h00', '1h00'), ('1h30', '1h30'), ('2h00', '2h00'), ('2h30', '2h30'), ('3h', '3h+')])

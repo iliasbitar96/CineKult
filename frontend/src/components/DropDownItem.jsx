@@ -3,7 +3,7 @@ import '../styles/DropDown.css'
 
 const DropDownItem = props => {
   return (
-    <li className='dropDownItem'>
+    <li key={props.id} className='dropDownItem'>
         {props.item}
     </li>
   )

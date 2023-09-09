@@ -6,6 +6,7 @@ import Decr from '../static/img/minus-cirlce.svg'
 
 const MovieCard = props => {
     const [count, setCount] = useState()
+    const [disabled, setDisabled] = useState()
     const set_votes = (e) => {
         const params = new URLSearchParams();
         console.log('ID', props.id)
@@ -33,7 +34,6 @@ const MovieCard = props => {
             console.log(props.id);
           }, [props.id]);
     }
-    
 
   return (
     <div className='movieCard'>
@@ -43,8 +43,8 @@ const MovieCard = props => {
                 <p><b>@Eleonor Guetatra{props.creator}</b></p>
             </div>
             <div className="vote-counter">
-                <img src={Incr} onClick={set_votes}/>
-                <span className='vote-count-number'>{count}</span>
+                <img className='active-vote' src={Incr} onClick={set_votes}/>
+                <span className={`vote-count-number`}>{count}</span>
                 <img src={Decr} onClick={remove_votes}/>
             </div>
         </div>

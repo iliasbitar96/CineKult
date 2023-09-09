@@ -57,3 +57,6 @@
 .info-title {
     opacity: 60%;
 }
+.active-vote {
+    color: #4B35F3;
+}

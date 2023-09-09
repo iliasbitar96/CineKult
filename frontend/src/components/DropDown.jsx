@@ -1,32 +1,46 @@
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import '../styles/DropDown.css'
 import ArrowDown from '../static/img/arrow-down.svg'
 import DropDownItem from './DropDownItem'
 
-const Searchbar = props => {
+const DropDown = props => {
 
   const [open, setOpen] = useState(false);
-  const [selectedWord, setSelectedWord] = useState([])
+  const [selectedWord, setSelectedWord] = useState()
+  const items = props.items 
 
-  const setChoice = e => {
-    console.log(e.item)
+  const setChoice = word => {
+    console.log(word)
+    setOpen(!open)
+    setSelectedWord(word)
   }
+
+  useEffect(() => {
+    const set_first_item = async () => {
+      setChoice(items[0])
+      setOpen(false)
+    };
+
+    set_first_item();
+  }, []);
 
   return (
     <div className='dropDown'>
       <div className="dropTop">
-          <span>Genre</span>
+          <DropDownItem item={selectedWord} onClick={setChoice}/>
           <img className={`drop-img ${open? 'active' : 'inactive'}`} src={ArrowDown} onClick={() => {setOpen(!open)}}/>
       </div>
       <div className={`dropBottom ${open? 'active' : 'inactive'}`}>
         <ul>
-          <DropDownItem item="Action" onClick={setChoice}/>
-          <DropDownItem item="Comedie"/>
-          <DropDownItem item="Thriller"/>
+          {items.map((item, index) => (
+            <div onClick={() => {setChoice(item)}}>
+              <DropDownItem id={index} item={item} />
+            </div>
+          ))}
         </ul>
       </div>
     </div>
   )
 }
 
-export default Searchbar
+export default DropDown
