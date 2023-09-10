@@ -42,14 +42,7 @@ function HomePage() {
       <div className="search-by">
         <p>Rechercher par</p>
         <DropDown items={search_by}/>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <Searchbar placeholder="Ecrivez le nom d'un acteur" /> 
+        <Searchbar keyword={true} placeholder="Ecrivez le nom d'un acteur" /> 
       </div>
       <ButtonTheme 
         name='Test'

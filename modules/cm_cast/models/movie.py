@@ -9,8 +9,12 @@ class Movie(models.Model):
     vote_ids = fields.One2many('vote', 'movie_id')
     cast_ids = fields.Many2many('cast.member', string="Actors", domain="[('member_type', '=', 'actor')]")
     genre = fields.Selection(
-        [('horror', 'Horror'), ('thriller', 'Thriller'), ('animation', 'Animation'), ('drame', 'Drame')])
-    duration = fields.Selection([('1h00', '1h00'), ('1h30', '1h30'), ('2h00', '2h00'), ('2h30', '2h30'), ('3h', '3h+')])
+        [('action', 'Action'), ('animation', 'Animation'), ('aventure', 'Aventure'), ('comédie', 'Comédie'),
+         ('drame', 'Drame'), ('fantastique', 'Fantastique'), ('guerre', 'Guerre'), ('historique', 'Historique'),
+         ('horreur', 'Horreur'), ('policier', 'Policier'), ('romance', 'Romance'),
+         ('science_fiction', 'Science fiction'), ('thriller', 'Thriller'), ('western', 'Western')])
+    duration = fields.Selection([('n1', '-1h00'), ('1h00', '1h00'), ('1h30', '1h30'), ('2h00', '2h00'),
+                                 ('2h30', '2h30'), ('3h', '3h'), ('p3h', '+3h')])
     description = fields.Text('Description')
     production = fields.Many2one('production', 'Production')
     creator_id = fields.Many2one('res.user')

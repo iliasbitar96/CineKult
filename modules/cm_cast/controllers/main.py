@@ -65,3 +65,7 @@ class Main(Controller):
                 'vote_type': post.get('up_vote') == '1',
             })
         return Response(json.dumps({'vote': movie_id.total_votes}), headers=headers_json)
+
+    @route('/cm_cast/filter_movies', type='http', auth='public', methods=['POST'], cors='*', csrf=False)
+    def filter_movie(self, **post):
+        print(post)
